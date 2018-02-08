@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+    android:defaultValue="3206"
+    android:key="@string/skier_id_pref" />
+    <EditTextPreference
+        android:defaultValue="13"
+        android:key="@string/season_pref" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/auto_refresh_pref" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/interval_keys"
+        android:entryValues="@array/interval_values"
+        android:key="@string/refresh_interval_pref" />
+    <EditTextPreference
+        android:defaultValue="1970-01-01T00:00:00"
+        android:key="@string/latest_run" />
+</PreferenceScreen>

@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Skistar Stats</string>
+    <string name="title_summary">Summary</string>
+    <string name="title_runs">Runs</string>
+    <string name="title_friends">Friends</string>
+
+    <string name="title_activity_user">Select User</string>
+
+    <string name="channel_name" translatable="false">Skistar</string>
+    <string name="channel_id" translatable="false">SKISTAR_NOTIFY</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="latest_run" translatable="false">latest_run</string>
+    <string name="skier_id_pref" translatable="false">skier_id</string>
+    <string name="season_pref" translatable="false">season</string>
+    <string name="auto_refresh_pref" translatable="false">auto_refresh</string>
+    <string name="refresh_interval_pref" translatable="false">refresh_interval</string>
+    <string name="default_skier" translatable="false">3206</string>
+    <string name="skier_id_no_col">Skier ID</string>
+    <string name="skier_id">Skier ID:</string>
+    <string name="drop_height">Drop height:</string>
+    <string name="run_count">Run count:</string>
+    <string name="latest_day">Latest day</string>
+    <string name="latest_week">Latest week</string>
+    <string name="latest_season">Latest season</string>
+
+    <string name="refresh_half_hour">Half hour</string>
+    <string name="refresh_hour">Hourly</string>
+    <string name="refresh_two_hours">Two hours</string>
+    <string name="refresh_six_hours">Six hours</string>
+    <string name="refresh_twelve_hours">Twelve hours</string>
+    <string name="refresh_day">Daily</string>
+    <string name="season">Season</string>
+    <string name="skistar_settings">Skistar settings</string>
+    <string name="automatic_updates">Automatic updates</string>
+    <string name="automatic_updates_summary">Enable to automatially refresh Skistar data</string>
+    <string name="refresh_interval">Refresh interval</string>
+    <string name="refresh_interval_summary">Frequency of automatic updates</string>
+
+</resources>

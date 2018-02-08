@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="interval_values">
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>21600000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+    </string-array>
+    <string-array name="interval_keys">
+        <item>@string/refresh_half_hour</item>
+        <item>@string/refresh_hour</item>
+        <item>@string/refresh_two_hours</item>
+        <item>@string/refresh_six_hours</item>
+        <item>@string/refresh_twelve_hours</item>
+        <item>@string/refresh_day</item>
+    </string-array>
+</resources>

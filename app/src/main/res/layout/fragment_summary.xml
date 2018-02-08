@@ -1,0 +1,216 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="se.theslof.skistarstats.viewmodel.MainModel" />
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="se.theslof.skistarstats.fragment.SummaryFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewSkierIDText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/skier_id"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSkierID"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.skierId}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewSkierIDText"
+                app:layout_constraintTop_toTopOf="@+id/textViewSkierIDText"
+                tools:text="SKIER_ID" />
+
+            <TextView
+                android:id="@+id/textViewDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/latest_day"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSkierIDText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSkierIDText" />
+
+            <TextView
+                android:id="@+id/textViewDayDropHeightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/drop_height"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewDay"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDay" />
+
+            <TextView
+                android:id="@+id/textViewDayDropHeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.dropHeightDay}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewDayDropHeightText"
+                app:layout_constraintTop_toTopOf="@+id/textViewDayDropHeightText"
+                tools:text="DROP_HEIGHT" />
+
+            <TextView
+                android:id="@+id/textViewDayRunCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/run_count"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewDayDropHeightText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDayDropHeightText" />
+
+            <TextView
+                android:id="@+id/textViewDayRunCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.runCountDay}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewDayRunCountText"
+                app:layout_constraintTop_toTopOf="@+id/textViewDayRunCountText"
+                tools:text="RUN_COUNT" />
+
+            <TextView
+                android:id="@+id/textViewWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/latest_week"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSkierIDText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDayRunCountText" />
+
+            <TextView
+                android:id="@+id/textViewWeekDropHeightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/drop_height"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewWeek"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWeek" />
+
+            <TextView
+                android:id="@+id/textViewWeekDropHeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.dropHeightWeek}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewWeekDropHeightText"
+                app:layout_constraintTop_toTopOf="@+id/textViewWeekDropHeightText"
+                tools:text="DROP_HEIGHT" />
+
+            <TextView
+                android:id="@+id/textViewWeekRunCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/run_count"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewWeekDropHeightText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWeekDropHeightText" />
+
+            <TextView
+                android:id="@+id/textViewWeekRunCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.runCountWeek}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewWeekRunCountText"
+                app:layout_constraintTop_toTopOf="@+id/textViewWeekRunCountText"
+                tools:text="RUN_COUNT" />
+
+            <TextView
+                android:id="@+id/textViewSeason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/latest_season"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSkierIDText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWeekRunCount" />
+
+            <TextView
+                android:id="@+id/textViewSeasonDropHeightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/drop_height"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSeason"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSeason" />
+
+            <TextView
+                android:id="@+id/textViewSeasonDropHeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.dropHeightSeason}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewSeasonDropHeightText"
+                app:layout_constraintTop_toTopOf="@+id/textViewSeasonDropHeightText"
+                tools:text="DROP_HEIGHT" />
+
+            <TextView
+                android:id="@+id/textViewSeasonRunCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/run_count"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textViewSeasonDropHeightText"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSeasonDropHeightText" />
+
+            <TextView
+                android:id="@+id/textViewSeasonRunCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.runCountSeason}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewSeasonRunCountText"
+                app:layout_constraintTop_toTopOf="@+id/textViewSeasonRunCountText"
+                tools:text="RUN_COUNT" />
+
+        </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
+</layout>

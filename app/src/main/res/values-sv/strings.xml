@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Skistar Stats</string>
+    <string name="title_summary">Överblick</string>
+    <string name="title_runs">Åk</string>
+    <string name="title_friends">Vänner</string>
+    <string name="title_activity_user">Välj Användare</string>
+    <string name="title_activity_settings">Inställningar</string>
+    <string name="settings">Inställningar</string>
+    <string name="refresh">Uppdatera</string>
+    <string name="skier_id">Åkar-ID:</string>
+    <string name="drop_height">Fallhöjd:</string>
+    <string name="run_count">Antal åk:</string>
+    <string name="latest_week">Senaste vecka</string>
+    <string name="latest_season">Senaste säsong</string>
+    <string name="latest_day">Senaste dag</string>
+    <string name="refresh_half_hour">Halvtimme</string>
+    <string name="refresh_hour">Varje timme</string>
+    <string name="refresh_two_hours">Två timmar</string>
+    <string name="refresh_six_hours">Sex timmar</string>
+    <string name="refresh_twelve_hours">Tolv timmar</string>
+    <string name="refresh_day">Dagligen</string>
+    <string name="season">Säsong</string>
+    <string name="skistar_settings">Skistar-inställningar</string>
+    <string name="automatic_updates">Automatiska uppdateringar</string>
+    <string name="automatic_updates_summary">Aktivera för att automatiskt uppdatera åkstatistik</string>
+    <string name="refresh_interval">Uppdateringsfrekvens</string>
+    <string name="refresh_interval_summary">Hur ofta datan uppdateras automatiskt</string>
+    <string name="skier_id_no_col">Åkar-ID</string>
+</resources>

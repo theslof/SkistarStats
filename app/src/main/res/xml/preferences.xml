@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/skistar_settings">
+
+        <EditTextPreference
+            android:defaultValue="3206"
+            android:key="@string/skier_id_pref"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/skier_id_no_col" />
+        <EditTextPreference
+            android:defaultValue="13"
+            android:key="@string/season_pref"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:title="@string/season" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/automatic_updates">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/auto_refresh_pref"
+            android:summary="@string/automatic_updates_summary"
+            android:title="@string/automatic_updates" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dependency="@string/auto_refresh_pref"
+            android:entries="@array/interval_keys"
+            android:entryValues="@array/interval_values"
+            android:key="@string/refresh_interval_pref"
+            android:summary="@string/refresh_interval_summary"
+            android:title="@string/refresh_interval" />
+    </PreferenceCategory>
+</PreferenceScreen>
