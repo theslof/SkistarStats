@@ -10,7 +10,7 @@
         android:defaultValue="false"
         android:key="@string/auto_refresh_pref" />
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="3600000"
         android:entries="@array/interval_keys"
         android:entryValues="@array/interval_values"
         android:key="@string/refresh_interval_pref" />

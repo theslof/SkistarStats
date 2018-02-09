@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import se.theslof.skistarstats.R;
 import se.theslof.skistarstats.databinding.LiftItemBinding;
-import se.theslof.skistarstats.fragment.RunsFragment;
 import se.theslof.skistarstats.model.LiftRide;
 
 /**

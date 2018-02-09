@@ -1,5 +1,6 @@
 package se.theslof.skistarstats.model;
 
+
 public class Latest {
 
 private LatestSeasonStatistics latestSeasonStatistics;

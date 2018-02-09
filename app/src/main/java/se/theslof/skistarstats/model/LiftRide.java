@@ -1,16 +1,50 @@
 package se.theslof.skistarstats.model;
 
+import android.arch.persistence.room.*;
+import android.arch.persistence.room.Entity;
+
 /**
  * Created by Martin on 2018-01-25.
  */
 
+@Entity(tableName = "lift_rides")
 public class LiftRide {
+    @PrimaryKey(autoGenerate = true)
+    private int rideid;
 
+    @ColumnInfo(name = "date")
     private String date;
+
+    @ColumnInfo(name = "season")
+    private String season;
+
+    @ColumnInfo(name = "lift_name")
     private String liftName;
+
+    @Embedded
     private Destination destination;
+
+    @ColumnInfo(name = "drop_height")
     private Integer dropHeight;
+
+    @ColumnInfo(name = "timestamp")
     private String timestamp;
+
+    public int getRideid() {
+        return rideid;
+    }
+
+    public void setRideid(int rideid) {
+        this.rideid = rideid;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
 
     public String getDate() {
         return date;
@@ -51,10 +85,4 @@ public class LiftRide {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
-    public String getFDate(){
-        String[] date = getDate().split("T");
-        return date[0] + " " + date[1].substring(0,5);
-    }
-
 }

@@ -26,6 +26,7 @@ import se.theslof.skistarstats.activity.MainActivity;
 import se.theslof.skistarstats.activity.SettingsActivity;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.service.APIClient;
+import se.theslof.skistarstats.utility.DateUtil;
 
 /**
  * Created by theslof on 2018-02-06.
@@ -52,18 +53,8 @@ public class AutoUpdateStats extends JobService {
             public void onResponse(Call<List<LiftRide>> call, Response<List<LiftRide>> response) {
                 String latestRun = sharedPreferences.getString(getResources().getString(R.string.latest_run), "1970-01-01T00:00:00");
                 String newRun = response.body().get(0).getDate();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                Date latestDate;
-                Date newDate;
-                try {
-                    latestDate = format.parse(latestRun);
-                    newDate = format.parse(newRun);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    return;
-                }
 
-                if(newDate.after(latestDate)){
+                if(DateUtil.isLater(latestRun, newRun)){
                     jobFinished(jobParameters,true);
 
                     NotificationCompat.Builder builder =
