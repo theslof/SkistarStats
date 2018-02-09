@@ -39,5 +39,6 @@
     <string name="automatic_updates_summary">Enable to automatially refresh Skistar data</string>
     <string name="refresh_interval">Refresh interval</string>
     <string name="refresh_interval_summary">Frequency of automatic updates</string>
+    <string name="new_data_notification">New data available!</string>
 
 </resources>

@@ -27,4 +27,5 @@
     <string name="refresh_interval">Uppdateringsfrekvens</string>
     <string name="refresh_interval_summary">Hur ofta datan uppdateras automatiskt</string>
     <string name="skier_id_no_col">Åkar-ID</string>
+    <string name="new_data_notification">Ny data tillgänglig!</string>
 </resources>

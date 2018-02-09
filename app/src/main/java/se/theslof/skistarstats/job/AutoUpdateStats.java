@@ -62,7 +62,7 @@ public class AutoUpdateStats extends JobService {
                                     getResources().getString(R.string.channel_id))
                                     .setSmallIcon(R.drawable.ic_notification)
                                     .setContentTitle(getResources().getString(R.string.app_name))
-                                    .setContentText("New data available!");
+                                    .setContentText(getString(R.string.new_data_notification));
 
                     Intent intent = new Intent(AutoUpdateStats.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
