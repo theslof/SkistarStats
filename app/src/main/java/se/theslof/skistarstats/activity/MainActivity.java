@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import se.theslof.skistarstats.R;
+import se.theslof.skistarstats.fragment.FriendsFragment;
 import se.theslof.skistarstats.fragment.RunsFragment;
 import se.theslof.skistarstats.fragment.SummaryFragment;
 import se.theslof.skistarstats.job.AutoUpdateStats;
@@ -31,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private MainModel viewModel;
     private SummaryFragment summaryFragment;
     private RunsFragment runsFragment;
+    private FriendsFragment friendsFragment;
+
     private boolean autoUpdate = false;
     private long updateInterval = 360000;
     private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
+
     JobScheduler jobScheduler;
     private int jobId = 1234;
 
@@ -62,9 +66,15 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
 
                     return true;
-//                case R.id.navigation_friends:
-//                    mTextMessage.setText(R.string.title_season);
-//                    return true;
+                case R.id.navigation_friends:
+                    if (friendsFragment == null)
+                        friendsFragment = FriendsFragment.newInstance(viewModel);
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.main_container, friendsFragment, "FRIENDS")
+                            .commit();
+
+                    return true;
             }
             return false;
         }

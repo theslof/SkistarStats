@@ -19,7 +19,7 @@ public class LauncherActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("skierId", "8664");
+//        intent.putExtra("skierId", "3206");
         startActivity(intent);
         finish();
     }

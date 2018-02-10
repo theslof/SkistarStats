@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import se.theslof.skistarstats.BR;
 import se.theslof.skistarstats.activity.SettingsActivity;
+import se.theslof.skistarstats.adapter.FriendsListAdapter;
 import se.theslof.skistarstats.adapter.LiftRidesListAdapter;
+import se.theslof.skistarstats.model.Entity;
 import se.theslof.skistarstats.model.LatestDayStatistics;
 import se.theslof.skistarstats.model.LatestSeasonStatistics;
 import se.theslof.skistarstats.model.LatestWeekStatistics;
@@ -26,7 +28,9 @@ public class MainModel extends BaseObservable {
     private boolean refreshing = false;
     private Context context;
     public final List<LiftRide> liftRides;
-    public final RecyclerView.Adapter adapter;
+    public final List<Entity> friendList;
+    public final RecyclerView.Adapter runsAdapter;
+    public final RecyclerView.Adapter friendsAdapter;
     private final Storage storage;
 
     public MainModel(Context context) {
@@ -36,7 +40,9 @@ public class MainModel extends BaseObservable {
         skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
         season = Integer.parseInt(sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13"));
         liftRides = new ArrayList<>();
-        adapter = new LiftRidesListAdapter(liftRides);
+        friendList = new ArrayList<>();
+        runsAdapter = new LiftRidesListAdapter(liftRides);
+        friendsAdapter = new FriendsListAdapter(friendList);
         storage = Storage.initialize(this);
     }
 
@@ -125,10 +131,14 @@ public class MainModel extends BaseObservable {
     public void setLiftRides(List<LiftRide> rides) {
         liftRides.clear();
         liftRides.addAll(rides);
-        adapter.notifyDataSetChanged();
+        runsAdapter.notifyDataSetChanged();
     }
 
-    // -- Retrofit --
+    public void setFriendList(List<Entity> friends) {
+        friendList.clear();
+        friendList.addAll(friends);
+        friendsAdapter.notifyDataSetChanged();
+    }
 
     public void refresh() {
         storage.refresh();

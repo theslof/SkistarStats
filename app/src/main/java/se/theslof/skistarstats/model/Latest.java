@@ -29,16 +29,4 @@ public class Latest {
     public void setLatestDayStatistics(LatestDayStatistics latestDayStatistics) {
         this.latestDayStatistics = latestDayStatistics;
     }
-
-    /*
-    private Chart chart;
-
-    public Chart getChart() {
-        return chart;
-    }
-
-    public void setChart(Chart chart) {
-        this.chart = chart;
-    }
-    */
 }

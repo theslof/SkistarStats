@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,10 +15,13 @@ import retrofit2.Response;
 
 import se.theslof.skistarstats.R;
 import se.theslof.skistarstats.activity.SettingsActivity;
+import se.theslof.skistarstats.model.Entity;
+import se.theslof.skistarstats.model.Entry;
 import se.theslof.skistarstats.model.Latest;
 import se.theslof.skistarstats.model.LatestDayStatistics;
 import se.theslof.skistarstats.model.LatestSeasonStatistics;
 import se.theslof.skistarstats.model.LatestWeekStatistics;
+import se.theslof.skistarstats.model.Leaderboard;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.sql.AppDatabase;
 import se.theslof.skistarstats.viewmodel.MainModel;
@@ -67,6 +71,10 @@ public final class Storage {
         model.setLiftRides(rides);
     }
 
+    private void pushFriends(List<Entity> friends) {
+        model.setFriendList(friends);
+    }
+
     private void saveLatest(LatestDayStatistics day, LatestWeekStatistics week, LatestSeasonStatistics season) {
         pushLatest(day, week, season);
         database.latestDao().insert(day);
@@ -83,6 +91,10 @@ public final class Storage {
         editor.putString(model.getContext().getResources().getString(R.string.latest_run), liftRides.get(0).getDate()).apply();
         database.liftRideDao().clear(model.getSeason());
         database.liftRideDao().insertAll(liftRides.toArray(new LiftRide[]{}));
+    }
+
+    private void saveFriends(List<Entity> friends) {
+        pushFriends(friends);
     }
 
     public void refresh() {
@@ -129,6 +141,22 @@ public final class Storage {
 
             @Override
             public void onFailure(Call<List<LiftRide>> call, Throwable t) {
+
+            }
+        });
+
+        APIClient.getSkistarService().leaderboard(skierId).enqueue(new Callback<Leaderboard>() {
+            @Override
+            public void onResponse(Call<Leaderboard> call, Response<Leaderboard> response) {
+                List<Entity> friends = new ArrayList<>();
+                for (Entry e : response.body().getEntries()) {
+                    friends.add(e.getEntity());
+                }
+                saveFriends(friends);
+            }
+
+            @Override
+            public void onFailure(Call<Leaderboard> call, Throwable t) {
 
             }
         });
