@@ -9,10 +9,6 @@ import se.theslof.skistarstats.model.LatestDayStatistics;
 import se.theslof.skistarstats.model.LatestSeasonStatistics;
 import se.theslof.skistarstats.model.LatestWeekStatistics;
 
-/**
- * Created by theslof on 2018-02-09.
- */
-
 @Dao
 public interface LatestDao {
     @Query("SELECT * FROM latest_day WHERE entityId LIKE :skierid LIMIT 1")

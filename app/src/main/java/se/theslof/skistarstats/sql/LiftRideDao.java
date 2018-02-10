@@ -8,10 +8,6 @@ import java.util.List;
 
 import se.theslof.skistarstats.model.LiftRide;
 
-/**
- * Created by theslof on 2018-02-09.
- */
-
 @Dao
 public interface LiftRideDao {
     @Query("SELECT * FROM lift_rides WHERE season LIKE :season")

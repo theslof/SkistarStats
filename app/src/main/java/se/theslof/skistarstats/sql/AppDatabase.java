@@ -10,10 +10,6 @@ import se.theslof.skistarstats.model.LatestSeasonStatistics;
 import se.theslof.skistarstats.model.LatestWeekStatistics;
 import se.theslof.skistarstats.model.LiftRide;
 
-/**
- * Created by theslof on 2018-02-09.
- */
-
 @Database(entities = {
         LatestDayStatistics.class,
         LatestWeekStatistics.class,

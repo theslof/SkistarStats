@@ -3,10 +3,6 @@ package se.theslof.skistarstats.model;
 import android.arch.persistence.room.*;
 import android.arch.persistence.room.Entity;
 
-/**
- * Created by Martin on 2018-01-25.
- */
-
 @Entity(tableName = "lift_rides")
 public class LiftRide {
     @PrimaryKey(autoGenerate = true)
@@ -52,39 +48,4 @@ public class LiftRide {
     public void setLiftName(String liftName) {
         this.liftName = liftName;
     }
-/*
-    @Embedded
-    private Destination destination;
-
-    public Destination getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
-
-    @ColumnInfo(name = "drop_height")
-    private Integer dropHeight;
-
-    @ColumnInfo(name = "timestamp")
-    private String timestamp;
-
-
-    public Integer getDropHeight() {
-        return dropHeight;
-    }
-
-    public void setDropHeight(Integer dropHeight) {
-        this.dropHeight = dropHeight;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-*/
 }

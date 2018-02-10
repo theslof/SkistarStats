@@ -11,10 +11,6 @@ import se.theslof.skistarstats.model.Leaderboard;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.model.SkistarSummary;
 
-/**
- * Created by theslof on 2018-01-30.
- */
-
 public interface SkistarAPIService {
 
     @GET("statistic/summary")

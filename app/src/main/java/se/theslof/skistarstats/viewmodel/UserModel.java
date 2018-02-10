@@ -9,10 +9,6 @@ import android.view.View;
 import se.theslof.skistarstats.BR;
 import se.theslof.skistarstats.activity.MainActivity;
 
-/**
- * Created by theslof on 2018-01-30.
- */
-
 public class UserModel extends BaseObservable {
     private String skierId = "";
     private Context context;

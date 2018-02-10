@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import se.theslof.skistarstats.R;
 import se.theslof.skistarstats.databinding.FragmentFriendsBinding;
-import se.theslof.skistarstats.databinding.FragmentRunsBinding;
 import se.theslof.skistarstats.viewmodel.MainModel;
 
 public class FriendsFragment extends Fragment {

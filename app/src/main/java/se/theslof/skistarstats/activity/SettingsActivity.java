@@ -7,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import se.theslof.skistarstats.R;
 import se.theslof.skistarstats.fragment.SettingsFragment;
 
-import java.util.List;
-
 public class SettingsActivity extends AppCompatActivity {
     public static final String PREF_SKIER_ID = "skier_id";
     public static final String PREF_SEASON = "season";

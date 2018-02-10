@@ -4,8 +4,6 @@ import android.arch.persistence.room.*;
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 @Entity(tableName = "latest_week")
 public class LatestWeekStatistics {
 

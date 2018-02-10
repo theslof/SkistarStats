@@ -26,10 +26,6 @@ import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.sql.AppDatabase;
 import se.theslof.skistarstats.viewmodel.MainModel;
 
-/**
- * Created by theslof on 2018-02-09.
- */
-
 public final class Storage {
     private AppDatabase database;
     private MainModel model;

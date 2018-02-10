@@ -11,10 +11,6 @@ import java.util.List;
 import se.theslof.skistarstats.databinding.LiftItemBinding;
 import se.theslof.skistarstats.model.LiftRide;
 
-/**
- * Created by theslof on 2018-02-07.
- */
-
 public class LiftRidesListAdapter extends RecyclerView.Adapter<LiftRidesListAdapter.ViewHolder> {
     private List<LiftRide> liftRides;
 

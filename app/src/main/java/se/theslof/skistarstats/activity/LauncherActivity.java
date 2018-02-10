@@ -1,13 +1,11 @@
 package se.theslof.skistarstats.activity;
 
 import android.content.Intent;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import se.theslof.skistarstats.R;
-import se.theslof.skistarstats.viewmodel.MainModel;
 
 public class LauncherActivity extends AppCompatActivity {
 

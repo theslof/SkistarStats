@@ -12,10 +12,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,10 +23,6 @@ import se.theslof.skistarstats.activity.SettingsActivity;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.service.APIClient;
 import se.theslof.skistarstats.utility.DateUtil;
-
-/**
- * Created by theslof on 2018-02-06.
- */
 
 public class AutoUpdateStats extends JobService {
     @Override

@@ -11,10 +11,6 @@ import java.util.List;
 import se.theslof.skistarstats.databinding.EntityItemBinding;
 import se.theslof.skistarstats.model.Entity;
 
-/**
- * Created by theslof on 2018-02-07.
- */
-
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.ViewHolder> {
     private List<Entity> skiers;
 
