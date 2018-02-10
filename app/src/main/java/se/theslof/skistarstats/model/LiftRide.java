@@ -21,15 +21,6 @@ public class LiftRide {
     @ColumnInfo(name = "lift_name")
     private String liftName;
 
-    @Embedded
-    private Destination destination;
-
-    @ColumnInfo(name = "drop_height")
-    private Integer dropHeight;
-
-    @ColumnInfo(name = "timestamp")
-    private String timestamp;
-
     public int getRideid() {
         return rideid;
     }
@@ -61,6 +52,9 @@ public class LiftRide {
     public void setLiftName(String liftName) {
         this.liftName = liftName;
     }
+/*
+    @Embedded
+    private Destination destination;
 
     public Destination getDestination() {
         return destination;
@@ -69,6 +63,13 @@ public class LiftRide {
     public void setDestination(Destination destination) {
         this.destination = destination;
     }
+
+    @ColumnInfo(name = "drop_height")
+    private Integer dropHeight;
+
+    @ColumnInfo(name = "timestamp")
+    private String timestamp;
+
 
     public Integer getDropHeight() {
         return dropHeight;
@@ -85,4 +86,5 @@ public class LiftRide {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+*/
 }

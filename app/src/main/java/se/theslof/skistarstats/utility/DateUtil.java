@@ -4,10 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by theslof on 2018-02-09.
- */
-
 public class DateUtil{
     private static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ss";
 

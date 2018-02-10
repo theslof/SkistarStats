@@ -1,96 +1,110 @@
 package se.theslof.skistarstats.model;
 
+import android.arch.persistence.room.*;
+import android.arch.persistence.room.Entity;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "latest_season")
 public class LatestSeasonStatistics {
 
-private Season season;
-private Object weeks;
-private Integer dropHeight;
-private Integer liftRides;
-private Integer kcal;
-private Integer pinCount;
-private Integer liftCount;
-private Integer dayCount;
-private Integer destinationCount;
-private String entityId;
+    @PrimaryKey
+    @NonNull
+    private String entityId;
 
-public Season getSeason() {
-return season;
-}
+    @ColumnInfo(name = "drop_height_season")
+    private Integer dropHeight;
 
-public void setSeason(Season season) {
-this.season = season;
-}
+    @ColumnInfo(name = "lift_rides_season")
+    private Integer liftRides;
 
-public Object getWeeks() {
-return weeks;
-}
+    public Integer getDropHeight() {
+        return dropHeight;
+    }
 
-public void setWeeks(Object weeks) {
-this.weeks = weeks;
-}
+    public void setDropHeight(Integer dropHeight) {
+        this.dropHeight = dropHeight;
+    }
 
-public Integer getDropHeight() {
-return dropHeight;
-}
+    public Integer getLiftRides() {
+        return liftRides;
+    }
 
-public void setDropHeight(Integer dropHeight) {
-this.dropHeight = dropHeight;
-}
+    public void setLiftRides(Integer liftRides) {
+        this.liftRides = liftRides;
+    }
 
-public Integer getLiftRides() {
-return liftRides;
-}
+    public String getEntityId() {
+        return entityId;
+    }
 
-public void setLiftRides(Integer liftRides) {
-this.liftRides = liftRides;
-}
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
 
-public Integer getKcal() {
-return kcal;
-}
+/*
+    private Object weeks;
+    private Integer kcal;
+    private Integer pinCount;
+    private Integer liftCount;
+    private Integer dayCount;
+    private Integer destinationCount;
+    private Season season;
 
-public void setKcal(Integer kcal) {
-this.kcal = kcal;
-}
+    public Season getSeason() {
+        return season;
+    }
 
-public Integer getPinCount() {
-return pinCount;
-}
+    public void setSeason(Season season) {
+        this.season = season;
+    }
 
-public void setPinCount(Integer pinCount) {
-this.pinCount = pinCount;
-}
 
-public Integer getLiftCount() {
-return liftCount;
-}
+    public Object getWeeks() {
+        return weeks;
+    }
 
-public void setLiftCount(Integer liftCount) {
-this.liftCount = liftCount;
-}
+    public void setWeeks(Object weeks) {
+        this.weeks = weeks;
+    }
 
-public Integer getDayCount() {
-return dayCount;
-}
+    public Integer getKcal() {
+        return kcal;
+    }
 
-public void setDayCount(Integer dayCount) {
-this.dayCount = dayCount;
-}
+    public void setKcal(Integer kcal) {
+        this.kcal = kcal;
+    }
 
-public Integer getDestinationCount() {
-return destinationCount;
-}
+    public Integer getPinCount() {
+        return pinCount;
+    }
 
-public void setDestinationCount(Integer destinationCount) {
-this.destinationCount = destinationCount;
-}
+    public void setPinCount(Integer pinCount) {
+        this.pinCount = pinCount;
+    }
 
-public String getEntityId() {
-return entityId;
-}
+    public Integer getLiftCount() {
+        return liftCount;
+    }
 
-public void setEntityId(String entityId) {
-this.entityId = entityId;
-}
+    public void setLiftCount(Integer liftCount) {
+        this.liftCount = liftCount;
+    }
 
+    public Integer getDayCount() {
+        return dayCount;
+    }
+
+    public void setDayCount(Integer dayCount) {
+        this.dayCount = dayCount;
+    }
+
+    public Integer getDestinationCount() {
+        return destinationCount;
+    }
+
+    public void setDestinationCount(Integer destinationCount) {
+        this.destinationCount = destinationCount;
+    }
+*/
 }

@@ -15,9 +15,11 @@ import retrofit2.Response;
 import se.theslof.skistarstats.R;
 import se.theslof.skistarstats.activity.SettingsActivity;
 import se.theslof.skistarstats.model.Latest;
+import se.theslof.skistarstats.model.LatestDayStatistics;
+import se.theslof.skistarstats.model.LatestSeasonStatistics;
+import se.theslof.skistarstats.model.LatestWeekStatistics;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.sql.AppDatabase;
-import se.theslof.skistarstats.sql.LatestEntity;
 import se.theslof.skistarstats.viewmodel.MainModel;
 
 /**
@@ -36,36 +38,40 @@ public final class Storage {
         storage.model = mainModel;
         storage.database = AppDatabase.getAppDatabase(mainModel.getContext());
 
-        LatestEntity latest = storage.database.latestDao().getLatest();
+        LatestDayStatistics latestDay = storage.database.latestDao().getLatestDay(mainModel.getSkierId());
+        LatestWeekStatistics latestWeek = storage.database.latestDao().getLatestWeek(mainModel.getSkierId());
+        LatestSeasonStatistics latestSeason = storage.database.latestDao().getLatestSeason(mainModel.getSkierId());
+
         List<LiftRide> rides = storage.database.liftRideDao().getLiftRides(mainModel.getSeason());
 
-        if (latest == null || rides == null)
+        if (latestDay == null ||
+                latestWeek == null ||
+                latestSeason == null ||
+                rides == null)
             storage.refresh();
         else {
-            storage.pushLatest(latest);
+            storage.pushLatest(latestDay, latestWeek, latestSeason);
             storage.pushRides(rides);
         }
 
         return storage;
     }
 
-    private void pushLatest(LatestEntity latest) {
-        model.setDropHeightDay(latest.getDayDropHeight());
-        model.setRunCountDay(latest.getDayLiftRides());
-        model.setDropHeightWeek(latest.getWeekDropHeight());
-        model.setRunCountWeek(latest.getWeekLiftRides());
-        model.setDropHeightSeason(latest.getSeasonDropHeight());
-        model.setRunCountSeason(latest.getSeasonLiftRides());
+    private void pushLatest(LatestDayStatistics day, LatestWeekStatistics week, LatestSeasonStatistics season) {
+        model.setLatestDay(day);
+        model.setLatestWeek(week);
+        model.setLatestSeason(season);
     }
 
     private void pushRides(List<LiftRide> rides) {
         model.setLiftRides(rides);
     }
 
-    private void saveLatest(final LatestEntity entity) {
-        pushLatest(entity);
-        database.latestDao().clear();
-        database.latestDao().insert(entity);
+    private void saveLatest(LatestDayStatistics day, LatestWeekStatistics week, LatestSeasonStatistics season) {
+        pushLatest(day, week, season);
+        database.latestDao().insert(day);
+        database.latestDao().insert(week);
+        database.latestDao().insert(season);
     }
 
     private void saveLiftRides(List<LiftRide> liftRides) {
@@ -104,7 +110,9 @@ public final class Storage {
         APIClient.getSkistarService().latestStatistics(skierId).enqueue(new Callback<Latest>() {
             @Override
             public void onResponse(Call<Latest> call, Response<Latest> response) {
-                saveLatest(LatestEntity.makeEntity(response.body()));
+                saveLatest(response.body().getLatestDayStatistics(),
+                        response.body().getLatestWeekStatistics(),
+                        response.body().getLatestSeasonStatistics());
             }
 
             @Override

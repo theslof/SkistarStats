@@ -11,22 +11,18 @@ import java.util.List;
 import se.theslof.skistarstats.BR;
 import se.theslof.skistarstats.activity.SettingsActivity;
 import se.theslof.skistarstats.adapter.LiftRidesListAdapter;
+import se.theslof.skistarstats.model.LatestDayStatistics;
+import se.theslof.skistarstats.model.LatestSeasonStatistics;
+import se.theslof.skistarstats.model.LatestWeekStatistics;
 import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.service.Storage;
-
-/**
- * Created by theslof on 2018-01-30.
- */
 
 public class MainModel extends BaseObservable {
     private String skierId = "";
     private int season;
-    private int dropHeightDay;
-    private int runCountDay;
-    private int dropHeightWeek;
-    private int runCountWeek;
-    private int dropHeightSeason;
-    private int runCountSeason;
+    private LatestDayStatistics latestDay = new LatestDayStatistics();
+    private LatestWeekStatistics latestWeek = new LatestWeekStatistics();
+    private LatestSeasonStatistics latestSeason = new LatestSeasonStatistics();
     private boolean refreshing = false;
     private Context context;
     public final List<LiftRide> liftRides;
@@ -51,17 +47,32 @@ public class MainModel extends BaseObservable {
 
     @Bindable
     public String getDropHeightDay() {
-        return "" + dropHeightDay;
-    }
-
-    @Bindable
-    public boolean isRefreshing() {
-        return refreshing;
+        return "" + latestDay.getDropHeight();
     }
 
     @Bindable
     public String getRunCountDay() {
-        return "" + runCountDay;
+        return "" + latestDay.getLiftRides();
+    }
+
+    @Bindable
+    public String getDropHeightWeek() {
+        return "" + latestWeek.getDropHeight();
+    }
+
+    @Bindable
+    public String getRunCountWeek() {
+        return "" + latestWeek.getLiftRides();
+    }
+
+    @Bindable
+    public String getDropHeightSeason() {
+        return "" + latestSeason.getDropHeight();
+    }
+
+    @Bindable
+    public String getRunCountSeason() {
+        return "" + latestSeason.getLiftRides();
     }
 
     @Bindable
@@ -70,23 +81,8 @@ public class MainModel extends BaseObservable {
     }
 
     @Bindable
-    public String getDropHeightWeek() {
-        return "" + dropHeightWeek;
-    }
-
-    @Bindable
-    public String getRunCountWeek() {
-        return "" + runCountWeek;
-    }
-
-    @Bindable
-    public String getDropHeightSeason() {
-        return "" + dropHeightSeason;
-    }
-
-    @Bindable
-    public String getRunCountSeason() {
-        return "" + runCountSeason;
+    public boolean isRefreshing() {
+        return refreshing;
     }
 
     public Context getContext() {
@@ -98,33 +94,21 @@ public class MainModel extends BaseObservable {
         notifyPropertyChanged(BR.refreshing);
     }
 
-    public void setDropHeightDay(int dropHeight) {
-        this.dropHeightDay = dropHeight;
+    public void setLatestDay(LatestDayStatistics latestDay) {
+        this.latestDay = latestDay;
         notifyPropertyChanged(BR.dropHeightDay);
-    }
-
-    public void setRunCountDay(int runCount) {
-        this.runCountDay = runCount;
         notifyPropertyChanged(BR.runCountDay);
     }
 
-    public void setDropHeightWeek(int dropHeightWeek) {
-        this.dropHeightWeek = dropHeightWeek;
+    public void setLatestWeek(LatestWeekStatistics latestWeek) {
+        this.latestWeek = latestWeek;
         notifyPropertyChanged(BR.dropHeightWeek);
-    }
-
-    public void setRunCountWeek(int runCountWeek) {
-        this.runCountWeek = runCountWeek;
         notifyPropertyChanged(BR.runCountWeek);
     }
 
-    public void setDropHeightSeason(int dropHeightSeason) {
-        this.dropHeightSeason = dropHeightSeason;
+    public void setLatestSeason(LatestSeasonStatistics latestSeason) {
+        this.latestSeason = latestSeason;
         notifyPropertyChanged(BR.dropHeightSeason);
-    }
-
-    public void setRunCountSeason(int runCountSeason) {
-        this.runCountSeason = runCountSeason;
         notifyPropertyChanged(BR.runCountSeason);
     }
 
