@@ -84,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        String skierid = intent.getStringExtra("skierId");
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        viewModel = new MainModel(this);
+        viewModel = new MainModel(this, skierid);
         binding.setViewModel(viewModel);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

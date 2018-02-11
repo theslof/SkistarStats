@@ -20,24 +20,24 @@ import se.theslof.skistarstats.model.LiftRide;
 import se.theslof.skistarstats.service.Storage;
 
 public class MainModel extends BaseObservable {
-    private String skierId = "";
+    private String skierId;
     private int season;
     private LatestDayStatistics latestDay = new LatestDayStatistics();
     private LatestWeekStatistics latestWeek = new LatestWeekStatistics();
     private LatestSeasonStatistics latestSeason = new LatestSeasonStatistics();
     private boolean refreshing = false;
     private Context context;
-    public final List<LiftRide> liftRides;
-    public final List<Entity> friendList;
+    private final List<LiftRide> liftRides;
+    private final List<Entity> friendList;
     public final RecyclerView.Adapter runsAdapter;
     public final RecyclerView.Adapter friendsAdapter;
     private final Storage storage;
 
-    public MainModel(Context context) {
+    public MainModel(Context context, String skierId) {
         this.context = context;
+        this.skierId = skierId;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
         season = Integer.parseInt(sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13"));
         liftRides = new ArrayList<>();
         friendList = new ArrayList<>();
@@ -141,6 +141,6 @@ public class MainModel extends BaseObservable {
     }
 
     public void refresh() {
-        storage.refresh();
+        storage.refresh(true);
     }
 }

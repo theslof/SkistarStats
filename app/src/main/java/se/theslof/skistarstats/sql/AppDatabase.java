@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import se.theslof.skistarstats.model.Entity;
 import se.theslof.skistarstats.model.LatestDayStatistics;
 import se.theslof.skistarstats.model.LatestSeasonStatistics;
 import se.theslof.skistarstats.model.LatestWeekStatistics;
@@ -14,7 +15,8 @@ import se.theslof.skistarstats.model.LiftRide;
         LatestDayStatistics.class,
         LatestWeekStatistics.class,
         LatestSeasonStatistics.class,
-        LiftRide.class}, version = 1, exportSchema = false)
+        LiftRide.class,
+        Entity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -23,12 +25,14 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract LiftRideDao liftRideDao();
 
+    public abstract FriendsDao friendsDao();
+
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context,
                             AppDatabase.class, "skistar-db")
-                            .allowMainThreadQueries()
+//                            .allowMainThreadQueries()
                             .build();
         }
         return INSTANCE;

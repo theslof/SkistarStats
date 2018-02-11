@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
@@ -33,26 +34,12 @@ public final class Storage {
     private Storage() {
     }
 
-    public static Storage initialize(MainModel mainModel) {
+    public static Storage initialize(MainModel aMainModel) {
         Storage storage = new Storage();
-        storage.model = mainModel;
-        storage.database = AppDatabase.getAppDatabase(mainModel.getContext());
+        storage.model = aMainModel;
+        storage.database = AppDatabase.getAppDatabase(aMainModel.getContext());
 
-        LatestDayStatistics latestDay = storage.database.latestDao().getLatestDay(mainModel.getSkierId());
-        LatestWeekStatistics latestWeek = storage.database.latestDao().getLatestWeek(mainModel.getSkierId());
-        LatestSeasonStatistics latestSeason = storage.database.latestDao().getLatestSeason(mainModel.getSkierId());
-
-        List<LiftRide> rides = storage.database.liftRideDao().getLiftRides(mainModel.getSeason());
-
-        if (latestDay == null ||
-                latestWeek == null ||
-                latestSeason == null ||
-                rides == null)
-            storage.refresh();
-        else {
-            storage.pushLatest(latestDay, latestWeek, latestSeason);
-            storage.pushRides(rides);
-        }
+        storage.refresh(false);
 
         return storage;
     }
@@ -71,32 +58,67 @@ public final class Storage {
         model.setFriendList(friends);
     }
 
-    private void saveLatest(LatestDayStatistics day, LatestWeekStatistics week, LatestSeasonStatistics season) {
+    private void saveLatest(final LatestDayStatistics day, final LatestWeekStatistics week, final LatestSeasonStatistics season) {
         pushLatest(day, week, season);
-        database.latestDao().insert(day);
-        database.latestDao().insert(week);
-        database.latestDao().insert(season);
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                database.latestDao().insert(day);
+                database.latestDao().insert(week);
+                database.latestDao().insert(season);
+                return null;
+            }
+        }.execute();
     }
 
-    private void saveLiftRides(List<LiftRide> liftRides) {
+    private void saveLiftRides(final List<LiftRide> liftRides) {
         for (LiftRide ride : liftRides) {
             ride.setSeason(model.getSeason());
         }
         pushRides(liftRides);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(model.getContext()).edit();
         editor.putString(model.getContext().getResources().getString(R.string.latest_run), liftRides.get(0).getDate()).apply();
-        database.liftRideDao().clear(model.getSeason());
-        database.liftRideDao().insertAll(liftRides.toArray(new LiftRide[]{}));
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                database.liftRideDao().clear(model.getSeason());
+                database.liftRideDao().insertAll(liftRides.toArray(new LiftRide[]{}));
+                return null;
+            }
+        }.execute();
     }
 
-    private void saveFriends(List<Entity> friends) {
+    private void saveFriends(final List<Entity> friends) {
         pushFriends(friends);
+
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                database.friendsDao().clear();
+                database.friendsDao().insertAll(friends.toArray(new Entity[]{}));
+                return null;
+            }
+        }.execute();
     }
 
-    public void refresh() {
+    public void refresh(boolean fromServer) {
         Context context = model.getContext();
+
+        if(model.isRefreshing())
+            return;
+
+        if(!fromServer){
+            new GetFromSQLite().execute(this);
+            return;
+        }
+
+        // Fetch latest data from Skistar servers
+
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        final String skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
+//        final String skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
         final String season = sharedPreferences.getString(SettingsActivity.PREF_SEASON,
                 context.getResources().getString(R.string.default_skier));
 
@@ -107,15 +129,15 @@ public final class Storage {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
 
-        if (!isConnected || model.isRefreshing())
+        if (!isConnected)
             return;
 
         model.setRefreshing(true);
-        model.setSkierId(skierId);
+//        model.setSkierId(skierId);
         model.setSeason(Integer.parseInt(season));
         model.setRefreshing(false);
 
-        APIClient.getSkistarService().latestStatistics(skierId).enqueue(new Callback<Latest>() {
+        APIClient.getSkistarService().latestStatistics(model.getSkierId()).enqueue(new Callback<Latest>() {
             @Override
             public void onResponse(Call<Latest> call, Response<Latest> response) {
                 saveLatest(response.body().getLatestDayStatistics(),
@@ -129,7 +151,7 @@ public final class Storage {
             }
         });
 
-        APIClient.getSkistarService().liftRides(skierId, "" + season).enqueue(new Callback<List<LiftRide>>() {
+        APIClient.getSkistarService().liftRides(model.getSkierId(), "" + season).enqueue(new Callback<List<LiftRide>>() {
             @Override
             public void onResponse(Call<List<LiftRide>> call, Response<List<LiftRide>> response) {
                 saveLiftRides(response.body());
@@ -141,7 +163,7 @@ public final class Storage {
             }
         });
 
-        APIClient.getSkistarService().leaderboard(skierId).enqueue(new Callback<Leaderboard>() {
+        APIClient.getSkistarService().leaderboard(model.getSkierId()).enqueue(new Callback<Leaderboard>() {
             @Override
             public void onResponse(Call<Leaderboard> call, Response<Leaderboard> response) {
                 List<Entity> friends = new ArrayList<>();
@@ -156,5 +178,36 @@ public final class Storage {
 
             }
         });
+    }
+
+    private static class GetFromSQLite extends AsyncTask<Storage, Void, LatestDayStatistics>{
+
+        @Override
+        protected LatestDayStatistics doInBackground(Storage... storages) {
+            Storage storage = storages[0];
+            AppDatabase database = storage.database;
+            MainModel model = storage.model;
+
+            LatestDayStatistics latestDay = database.latestDao().getLatestDay(model.getSkierId());
+            LatestWeekStatistics latestWeek = database.latestDao().getLatestWeek(model.getSkierId());
+            LatestSeasonStatistics latestSeason = database.latestDao().getLatestSeason(model.getSkierId());
+            List<LiftRide> rides = database.liftRideDao().getLiftRides(model.getSeason());
+            List<Entity> friends = database.friendsDao().getFriends();
+
+            if (latestDay == null ||
+                    latestWeek == null ||
+                    latestSeason == null ||
+                    friends == null ||
+                    rides == null)
+                storage.refresh(true);
+            else {
+                storage.pushLatest(latestDay, latestWeek, latestSeason);
+                storage.pushRides(rides);
+                storage.pushFriends(friends);
+            }
+
+            return latestDay;
+
+        }
     }
 }
