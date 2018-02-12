@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,9 +108,6 @@ public final class Storage {
     public void refresh(boolean fromServer) {
         Context context = model.getContext();
 
-        if(model.isRefreshing())
-            return;
-
         if(!fromServer){
             new GetFromSQLite().execute(this);
             return;
@@ -128,8 +126,12 @@ public final class Storage {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            model.setRefreshing(false);
+            return;
+        }
 
-        if (!isConnected)
+        if(model.isRefreshing())
             return;
 
         model.setRefreshing(true);
@@ -184,6 +186,8 @@ public final class Storage {
 
         @Override
         protected LatestDayStatistics doInBackground(Storage... storages) {
+            if(storages.length < 1)
+                return null;
             Storage storage = storages[0];
             AppDatabase database = storage.database;
             MainModel model = storage.model;
