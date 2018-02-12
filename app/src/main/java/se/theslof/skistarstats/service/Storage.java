@@ -116,7 +116,7 @@ public final class Storage {
         // Fetch latest data from Skistar servers
 
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        final String skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
+        final String skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
         final String season = sharedPreferences.getString(SettingsActivity.PREF_SEASON,
                 context.getResources().getString(R.string.default_skier));
 
@@ -135,7 +135,7 @@ public final class Storage {
             return;
 
         model.setRefreshing(true);
-//        model.setSkierId(skierId);
+        model.setSkierId(skierId);
         model.setSeason(Integer.parseInt(season));
         model.setRefreshing(false);
 

@@ -35,9 +35,9 @@ public class MainModel extends BaseObservable {
 
     public MainModel(Context context, String skierId) {
         this.context = context;
-        this.skierId = skierId;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
+        this.skierId = sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13");
         season = Integer.parseInt(sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13"));
         liftRides = new ArrayList<>();
         friendList = new ArrayList<>();
