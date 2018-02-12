@@ -33,11 +33,11 @@ public class MainModel extends BaseObservable {
     public final RecyclerView.Adapter friendsAdapter;
     private final Storage storage;
 
-    public MainModel(Context context, String skierId) {
+    public MainModel(Context context) {
         this.context = context;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        this.skierId = sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13");
+        skierId = sharedPreferences.getString(SettingsActivity.PREF_SKIER_ID, "3206");
         season = Integer.parseInt(sharedPreferences.getString(SettingsActivity.PREF_SEASON, "13"));
         liftRides = new ArrayList<>();
         friendList = new ArrayList<>();
